@@ -124,46 +124,6 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-enum BodyPart {
-  head("Head"),
-  torso("Torso"),
-  legs("Legs");
-
-  const BodyPart(this.name);
-  final String name;
-
-  @override
-  String toString() {
-    return 'BodyPart{name: $name}';
-  }
-}
-  // String _getButtonText() {
-  //   switch (gameState) {
-  //     case GameState.readyToStart:
-  //       return "START";
-  //     case GameState.waiting:
-  //       return "WAIT";
-  //     case GameState.canBeStopped:
-  //       return "STOP";
-  //   }
-  // }
-// enum BodyPart {
-//   head("Head"),
-//   torso("Torso"),
-//   legs("Legs");
-
-//   const BodyPart(this.name);
-//   final String name;
-
-//   @override
-//   String toString() {
-//     return 'BodyPart{name: $name}';
-//   }
-// }
-
-
-
-
   void _startWaitingTimer() {
     final int randomMilliseconds = Random().nextInt(4000) + 1000;
     _waitingTimer = Timer(Duration(microseconds: randomMilliseconds), () {
