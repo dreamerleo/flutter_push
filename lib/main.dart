@@ -26,8 +26,8 @@ class _MyHomePageState extends State<MyHomePage> {
   String millisecondText = "";
   GameState gameState = GameState.readyToStart;
 
-  Timer? waitingTimer;
-  Timer? stoppableTimer;
+  Timer? _waitingTimer;
+  Timer? _stoppableTimer;
   // String? get millisecondsText => null;
 
   @override
@@ -85,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     break;
                   case GameState.canBeStopped:
                     gameState = GameState.readyToStart;
-                    stoppableTimer?.cancel();
+                    _stoppableTimer?.cancel();
                     break;
                 }
               }),
@@ -124,9 +124,49 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
+enum BodyPart {
+  head("Head"),
+  torso("Torso"),
+  legs("Legs");
+
+  const BodyPart(this.name);
+  final String name;
+
+  @override
+  String toString() {
+    return 'BodyPart{name: $name}';
+  }
+}
+  // String _getButtonText() {
+  //   switch (gameState) {
+  //     case GameState.readyToStart:
+  //       return "START";
+  //     case GameState.waiting:
+  //       return "WAIT";
+  //     case GameState.canBeStopped:
+  //       return "STOP";
+  //   }
+  // }
+// enum BodyPart {
+//   head("Head"),
+//   torso("Torso"),
+//   legs("Legs");
+
+//   const BodyPart(this.name);
+//   final String name;
+
+//   @override
+//   String toString() {
+//     return 'BodyPart{name: $name}';
+//   }
+// }
+
+
+
+
   void _startWaitingTimer() {
     final int randomMilliseconds = Random().nextInt(4000) + 1000;
-    waitingTimer = Timer(Duration(microseconds: randomMilliseconds), () {
+    _waitingTimer = Timer(Duration(microseconds: randomMilliseconds), () {
       setState(() {
         gameState = GameState.canBeStopped;
       });
@@ -135,7 +175,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _startStoppableTimer() {
-    stoppableTimer = Timer.periodic(Duration(milliseconds: 16), (timer) {
+    _stoppableTimer = Timer.periodic(Duration(milliseconds: 16), (timer) {
       setState(() {
         millisecondText = "${timer.tick * 16} ms";
       });
@@ -156,8 +196,8 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void dispose() {
     //waitingTimer?.cancel();
-    waitingTimer?.cancel();
-    stoppableTimer?.cancel();
+    _waitingTimer?.cancel();
+    _stoppableTimer?.cancel();
     super.dispose();
   }
 }
