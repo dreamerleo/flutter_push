@@ -110,6 +110,9 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
+      bottomNavigationBar: BottomAppBar(
+        color: Colors.red,
+      ),
     );
   }
 
